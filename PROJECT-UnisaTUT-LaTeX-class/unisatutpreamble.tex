@@ -1,0 +1,314 @@
+%% LaTeX oreamble to include in all UNISA tut letters
+%%
+
+%% SET path to graphics
+\graphicspath{ {./} }
+%\graphicspath{ {./images/} }
+
+
+%% LOAD packages and set options
+
+\usepackage{
+	acronym,
+	amsfonts,  			% blackboard bold symbols e.g. for real numbers
+	amsmath,			% for any decent maths
+	amssymb,			% AMS symbols
+    array,			
+	comment,			% selective in/exclusion of text
+	enumitem,
+%	etoolbox,			% e_Tex toolbox
+	framed,             % nicer frames
+	gensymb,
+	graphicx,  			% include jpeg or pdf pictures
+%	hyperref,			% to use URLs in the text
+%	ifthen,				% logical flow control
+    karnaugh-map, 		% Karnaugh maps
+	lineno,				% add line numbers to text
+	listings,           % to show code listings
+	longtable,			% multi-page tables
+	mathtools,			% ditto
+	microtype,			% perform various microtypesetting tricks
+    pgfmath,
+	subfigure,			% multiple figures in one
+	textcomp,
+	tikz,				% Tikz figures and diagrams
+	tikz-3dplot,		% 3D plots in Tikz
+%	verbatim,			% verbatim text and multiline comments
+	wrapfig,			% wrap text around figures
+	xcolor,             % pre-defined colour names
+	xfrac,				% better-looking fractions - uses \sfrac
+	}
+
+\usepackage[
+    colorlinks=true,    % use coloured hyperlinks
+    breaklinks=true,    % break links across lines
+    ]{hyperref}
+
+
+
+
+%% ADJUST some dimensions
+
+%% add space between paragraphs
+\setlength{\parskip}{12pt plus6pt minus4pt}
+
+
+
+
+%% DEFINE new commands or re-define existing commmands
+
+%% red line across page to use as editing marker
+\newcommand{\redline}{
+\textcolor{red}{\noindent\makebox[\linewidth]{\rule{\paperwidth}{10pt}}}}
+
+%% thin black line across the width of the text
+\newcommand{\textwidthline}{
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}}
+
+
+%% command to add an open line
+\def\wl{\par \vspace{\baselineskip}}
+
+%% 
+\newcommand{\var}[2]{% 
+   \newlength{#1} 
+   \setlength{#1}{#2} 
+} 
+
+
+
+
+
+%% DEFINE specific colour names
+\definecolor{colour_coffee}{RGB}{219,144,71}
+\definecolor{colour_airforceblue}{RGB}{0.36, 0.54, 0.66}
+\definecolor{shadecolor}{rgb}{1.0,0.8,0.3}
+
+
+
+
+
+%% TIKZ stuff
+
+%% TIKZ libraries to load
+\usetikzlibrary{
+    automata,
+    shapes,
+    shapes.geometric,
+    shapes.callouts,
+    patterns,
+    calc,
+    intersections,
+    angles,
+    quotes,
+    arrows.meta,
+    arrows,
+    decorations,
+      decorations.markings,
+      decorations.text,
+      decorations.pathmorphing,
+    positioning,
+    }
+
+
+%% set up TIKZ values and styles
+\tikzset{
+%% global TIKZ settings
+	x=1cm,
+	y=1cm,
+	axis/.style={
+		very thick,
+		-latex,
+		>=stealth'
+	},
+%% arrow to use in graphs
+	grapharrow/.style={
+		-latex,
+		>=stealth'
+	},
+%% red triangle with black border
+	triangle/.style={
+		line width=0.5pt,
+		draw=black,
+		fill=red!60,
+		shape border rotate=#1,
+		isosceles triangle,
+		isosceles triangle apex angle=60,
+		minimum height=0.2cm,
+		minimum width=0.25cm,
+		isosceles triangle stretches,
+		inner sep=0pt
+	},
+%% thin axis
+	thinaxis/.style={
+		thick
+	},
+%% black triangle
+	triangle/.style={
+		line width=0.3pt,
+		draw=black,
+		shape border rotate=#1,
+		isosceles triangle,
+		isosceles triangle apex angle=60,
+		minimum height=0.2cm,
+		minimum width=0.25cm,
+%		isosceles triangle stretches,
+		inner sep=0pt
+	},
+%% triangle with point up
+	trianglepointup/.style={
+		triangle=+90
+		},
+%% triangle with point down
+	trianglepointdown/.style={
+		triangle=-90
+	},
+%% node representing negative values
+	negnode/.style={
+		trianglepointdown,
+		fill=red!60
+	},
+%% node representing positive values
+	posnode/.style={
+		line width=0.5pt,
+		draw=black,
+		fill=green!60,
+		rectangle,
+		minimum height=0.2cm,
+		minimum width=0.2cm,
+		inner sep=0pt
+	},
+%% node representing hypothesis in decision tree learning
+	hypothesis/.style={
+		rectangle,
+%		fill=blue!10,
+		inner sep=1pt,
+		minimum size=4mm
+	},
+%% empty node
+	nodenoborder/.style={
+		rectangle,
+%		fill=blue!10,
+		inner sep=1pt,
+		minimum size=4mm
+	},
+%% decision tree node
+	dectreenode/.style={
+		rectangle,
+		draw=black,
+		line width=0.75pt,
+		fill=white,
+		inner sep=2pt,
+		minimum height=0.5cm
+	},
+%% decision node
+    decnode/.style={
+        circle,
+        draw=black,
+        line width=0.75pt,
+        fill=white,
+        inner sep=1pt,
+        minimum size=0.8cm
+    },
+%% leaf node in graph
+	leafnode/.style={
+		rectangle,
+		draw=black,
+		line width=0.75pt,
+		fill=white,
+		rounded corners=1mm,
+		inner sep=1pt,
+		minimum size=0.8cm
+	},
+%% leaf node in decision tree
+	leaftreenode/.style={
+		rectangle,
+%		draw=black,
+%		line width=0.75pt,
+		fill=white,
+%		rounded corners=1mm,
+		inner sep=2pt,
+		minimum size=0.8cm
+	},
+%% full line arc in decision tree
+	decarrowfull/.style={
+		-latex,
+		>=stealth',
+		line width=1.2pt
+	},
+%% dashed line arc in decision tree
+	decarrowdashed/.style={
+		-latex,
+		>=stealth',
+		dashed,
+		line width=1.2pt,
+	},
+%% dotted arrow
+	arrowdotted/.style={
+		-latex,
+		>=stealth',
+		dotted,
+		line width=1.2pt,
+	},
+%% speech bubble for comments or details in diagrams
+	notice/.style={
+		draw,
+		fill=yellow!30,
+		rectangle callout,
+%		callout relative pointer={#1}
+		callout absolute pointer={#1}
+	},
+%% vector
+	vecarrow/.style={
+		line width=3pt,
+		decoration={markings,mark=at position 1 with 
+			{\arrow[line width = 3pt,fill=white]{open triangle 60}}},
+		double distance=0.0pt,
+		shorten >= 5.5pt,
+		preaction = {decorate},
+		shorten >= 3pt,
+		postaction = {
+			draw,
+			line width=2.5pt,
+			white,
+			shorten >= 15pt}
+	},
+%% hyperplane line for 2D neural networks 
+	hyperplane/.style={
+		draw=blue,
+		line width=3pt,
+		opacity=0.3
+	},
+%% node in perceptron neural network 
+	perceptronnode/.style={
+		circle,
+		draw=black,
+		line width=0.75pt,
+		fill=white,
+		inner sep=2pt,
+		minimum size=2cm
+	},
+%% input node in perceptron neural network
+	perceptroninput/.style={
+		circle,
+		draw=black,
+		line width=0.75pt,
+		fill=black!50,
+		inner sep=0pt,
+		minimum size=0.75cm
+	},
+%% circle node
+    circnode/.style={
+        line width=0.5pt,
+        draw=black,
+        fill=blue!60,
+        circle,
+        minimum height=0.2cm,
+        minimum width=0.2cm,
+        inner sep=0pt
+    },
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
