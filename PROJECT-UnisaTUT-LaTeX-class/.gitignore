@@ -1,8 +1,11 @@
 *.aux
+*.esc
+*.est
 *.bib
 *.dvi
 *.fdb_latexmk
 *.fls
 *.out
-*.pdf
+*.log
+*.nop
 *.synctex.gz
