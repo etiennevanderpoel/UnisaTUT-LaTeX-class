@@ -1,1 +1,1 @@
-# UnisaTUT-class-file
+# README for UnisaTUT-LaTeX-class
